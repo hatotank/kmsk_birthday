@@ -1,0 +1,9 @@
+db/*.db
+img/*
+!img/.gitkeep
+log4php/*
+!log4php/.gitkeep
+twitteroauth/*
+!twitteroauth/.gitkeep
+mailoutput/*
+debug/*
