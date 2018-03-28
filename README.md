@@ -10,22 +10,22 @@ twitter_api_key.phpとconfig.xmlの中身は必ず書き換えてください。
 
 ## フォルダ・ファイル構成
 ```
-├ autoload.php … TwitterOAuth  
-├ config.xml … log4phpメール送信定義  
-├ kmsk_birthday.php … 本体   
-├ LICENSE … ライセンス  
-├ README.md … 現在のファイル  
-├ twitter_api_key.php … APIキー定義  
-│  
-├ db … DBファイル  
-│ ├ create_db.sh … kmsk_birthday.dbを作成(sqlite3)  
-│ └ kmsk_birthday.sql … テーブルダンプ  
-│  
-├ img … アイコンファイル格納(下記参照)  
-│  
-├ log4php … log4php格納  
-│    
-└ twitteroauth … TwitterOAuth格納  
+├ autoload.php … TwitterOAuth
+├ config.xml … log4phpメール送信定義
+├ kmsk_birthday.php … 本体
+├ LICENSE … ライセンス
+├ README.md … 現在のファイル
+├ twitter_api_key.php … APIキー定義
+│
+├ db … DBファイル格納
+│ ├ create_db.sh … kmsk_birthday.dbを作成(sqlite3)
+│ └ kmsk_birthday.sql … テーブルダンプ
+│
+├ img … アイコンファイル格納(下記参照)
+│
+├ log4php … log4php格納
+│
+└ twitteroauth … TwitterOAuth格納
 ```
 
 ## テーブル仕様
