@@ -9,6 +9,7 @@ twitter_api_key.phpとconfig.xmlの中身は必ず書き換えてください。
 - [稼働ツイッター](https://twitter.com/kmsk_book_club)
 
 ## フォルダ・ファイル構成
+```
 ├ autoload.php … TwitterOAuth  
 ├ config.xml … log4phpメール送信定義  
 ├ kmsk_birthday.php … 本体   
@@ -25,9 +26,11 @@ twitter_api_key.phpとconfig.xmlの中身は必ず書き換えてください。
 ├ log4php … log4php格納  
 │    
 └ twitteroauth … TwitterOAuth格納  
+```
 
 ## テーブル仕様
 **eg_char**
+
 |列名|型|内容|
 |:---|:---|:---|
 |char_no|integer|(PK)キャラ番号|
