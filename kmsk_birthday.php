@@ -11,8 +11,9 @@ error_reporting(E_ALL & ~E_NOTICE);
 date_default_timezone_set("Asia/Tokyo");
 
 // インクルード
-require_once("twitter_api_key.php");
-require_once("autoload.php");
+require_once("ca-bundle/src/CaBundle.php");
+require_once(dirname(__FILE__)."/twitter_api_key.php");
+require_once(dirname(__FILE__)."/twitteroauth/autoload.php");
 use Abraham\TwitterOAuth\TwitterOAuth;
 
 // DB接続
@@ -58,41 +59,42 @@ if(count($result) > 0){
   foreach($result as $v){
     if($idx > 0){
       $tw_string = $tw_string."、".$v['char_kanji'];
-      $media[] = $tw->upload('media/upload',['media'=>"img/".$v['icon_file'].".png"]);
     }else{
       $tw_string = $tw_string.$v['char_kanji'];
-      $media[] = $tw->upload('media/upload',['media'=>"img/".$v['icon_file'].".png"]);
     }
+    $media[] = $tw->upload('media/upload',['media'=>"img/".$v['icon_file'].".png"]);
     $idx++;
   }
   $tw_string = $tw_string . "の誕生日です。";
 
-
   // メディアパラメータ作成
-  $tw_media_ids = "";
+  $tw_media_ids = array();
   $idx = 0;
   foreach($media as $v){
-    if($idx > 0){
-      $tw_media_ids = $tw_media_ids.",".$v->media_id_string;
-    }else{
-      $tw_media_ids = $v->media_id_string;
-    }
-    $idx++;
+    $tw_media_ids[] = $v->media_id_string;
   }
 
   // パラメータに投稿内容とメディア指定
-  $parameters = ['status'=>$tw_string,'media_ids'=>$tw_media_ids,];
+  $parameters = [
+    'text' => $tw_string,
+    'media' => [
+      'media_ids' => $tw_media_ids
+    ]
+  ];
+
+  // API v2指定
+  $tw->setApiVersion("2");
   // Twitter投稿
-  $statues = $tw->post('statuses/update',$parameters);
+  $statues = $tw->post('tweets',$parameters,true);
   // エラーチェック
-  if($tw->getLastHttpCode() == 200){
+  if($tw->getLastHttpCode() == 201){
     // Tweet posted succesfully
+    $log4->debug("Tweet posted succesfully");
     $log4->debug($tw_string);
-    $log4->debug("投稿成功。");
   }else{
     // Handle error case
+    $log4->debug("Handle error case");
     $log4->debug($tw_string);
-    $log4->debug("投稿失敗。");
   }
 }
 $db = null;
